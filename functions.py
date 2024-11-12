@@ -1,4 +1,6 @@
 import random
+from data import data_dictionary
+from openpyxl import Workbook
 
 def generate_npc(data_dictonary):
 
@@ -24,5 +26,22 @@ def generate_npc(data_dictonary):
       for key,value in npc_dictionary.items():
             print(f"{key}: {value}")
 
-def export_to_xlsx():
-      pass
+def export_to_xlsx(data_dictonary):
+
+      # Initialize a new workbook
+      workbook = Workbook()
+      # Remove the default sheet created by openpyxl
+      workbook.remove(workbook.active)
+
+      # Populate each key's data in a separate sheet
+      for key, values in data_dictionary.items():
+            # Create a new sheet with the name of the key
+            sheet = workbook.create_sheet(title=key)
+      
+            # Write each item in the list to a new row in the sheet
+            for row_num, value in enumerate(values, start=1):
+                  sheet.cell(row=row_num, column=1, value=value)
+
+      # Save the workbook to a file
+      workbook.save("data_dictionary.xlsx")
+
