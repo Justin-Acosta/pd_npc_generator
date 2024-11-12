@@ -1,11 +1,11 @@
 import random
 from data import data_dictionary
-from openpyxl import Workbook
+from openpyxl import Workbook,load_workbook
 
 def generate_npc(data_dictonary):
 
 
-      weights = data_dictonary["npc_weights"]
+      weights = data_dictonary["tribe_weights"]
       total_weight = sum(weights)
       weights = [weight / total_weight * 100 for weight in weights]
 
@@ -45,3 +45,23 @@ def export_to_xlsx(data_dictonary):
       # Save the workbook to a file
       workbook.save("data_dictionary.xlsx")
 
+def import_from_xlsx(file_name):
+      # Load the workbook
+      workbook = load_workbook(file_name)
+
+      # Initialize a dictionary to hold the data
+      data_dictionary = {}
+
+      # Iterate through each sheet in the workbook
+      for sheet_name in workbook.sheetnames:
+            # Get the current sheet
+            sheet = workbook[sheet_name]
+      
+            # Extract data from each row in column A and add to list
+            data_dictionary[sheet_name] = [cell.value for cell in sheet['A'] if cell.value is not None]
+
+      # Close the workbook after extraction
+      workbook.close()
+
+      # Your data is now in data_dictionary
+      return data_dictionary

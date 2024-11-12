@@ -201,7 +201,7 @@ data_dictionary = {
         "Medea",
         "Ekion"
     ],
-    "npc_weights" : [33,33,33,1],
+    "tribe_weights" : [33,33,33,1],
     "tribe": ["Ionian", "Phrygian", "Aeolian", "Xenoi"],
     "personality": [
         "Shy",

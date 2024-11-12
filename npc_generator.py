@@ -1,7 +1,7 @@
 from data import data_dictionary
-from functions import generate_npc,export_to_xlsx
+from functions import generate_npc,export_to_xlsx,import_from_xlsx
 
-
-generate_npc(data_dictionary)
+npc_dictionary = import_from_xlsx("data_dictionary.xlsx")
+generate_npc(npc_dictionary)
 # export_to_xlsx(data_dictionary)
 
